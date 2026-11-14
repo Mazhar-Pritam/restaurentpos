@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POS terminal · Restaurant POS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/theme.css" rel="stylesheet">
+</head>
+<body data-page="pos.html">
+  <div id="app-sidebar"></div>
+  <div class="main">
+    <div id="app-topbar"></div>
+    <main class="content">
+      <div class="page-head"><h1>POS terminal</h1>
+        <input id="q" class="form-control" style="max-width:300px" type="search" placeholder="Search menu"></div>
+      <div class="pos">
+        <section class="pos-left">
+          <div id="cats" class="cats"></div>
+          <div id="items" class="items"></div>
+        </section>
+        <aside class="ticket" aria-label="Current order">
+          <div class="t-head">
+            <div class="row g-2">
+              <div class="col-6"><label class="form-label small mb-0" for="type">Order type</label>
+                <select id="type" class="form-select form-select-sm"><option>Dine-in</option><option>Takeaway</option></select></div>
+              <div class="col-6" id="tableWrap"><label class="form-label small mb-0" for="table">Table</label>
+                <select id="table" class="form-select form-select-sm"><option>T1</option><option>T2</option><option>T3</option><option>T4</option><option>T5</option></select></div>
+            </div>
+          </div>
+          <div id="lines" class="t-lines"></div>
+          <div class="t-foot">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <label class="small" for="discount">Discount %</label>
+              <input id="discount" type="number" min="0" max="5" value="0" class="form-control form-control-sm" style="width:80px">
+              <button id="clear" class="btn btn-sm btn-light ms-auto">Clear</button>
+            </div>
+            <div id="sums"></div>
+            <div id="pay" class="pay">
+              <button data-pay="Cash" class="active">Cash</button><button data-pay="Card">Card</button><button data-pay="Mobile">Mobile</button>
+            </div>
+            <button id="charge" class="btn btn-accent w-100 py-2" disabled>Charge</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <div id="app-footer"></div>
+  </div>
+  <div id="receipt"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/pos.js"></script>
+</body>
+</html>
