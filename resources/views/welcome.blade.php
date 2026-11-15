@@ -1,4 +1,5 @@
 @extends("Layouts.master")
+
 @section("content")
   <div class="page-head">
         <div><h1>Dashboard</h1><nav aria-label="breadcrumb"><ol class="breadcrumb small mb-0"><li class="breadcrumb-item">Overview</li><li class="breadcrumb-item active">Dashboard</li></ol></nav></div>

@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str;  
 
 Route::get('/', fn () => redirect('/dashboard'));
 
@@ -13,7 +14,7 @@ Route::view('/dashboard', 'dashboard');
 $pages = [
     'pos', 'orders', 'orders/returns',
     'tables', 'kitchen', 'tables/reservations',
-    'menu', 'menu/categories', 'menu/recipes',
+    'menu', 'menu/recipes',
     'inventory', 'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
     'purchases', 'purchases/returns', 'suppliers',
     'customers', 'users',
@@ -25,3 +26,11 @@ $pages = [
 foreach ($pages as $page) {
     Route::view($page, 'coming-soon', ['title' => Str::headline($page)]);
 }
+Auth::routes();
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+    Route::resource('menu/categories', CategoryController::class)
+        ->except('show')
+        ->names('categories');
+});
