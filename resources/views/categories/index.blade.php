@@ -26,9 +26,11 @@
         </ol>
       </nav>
     </div>
-    <a class="btn btn-accent" href="{{ route('categories.create') }}">
-      <i class="bi bi-plus-lg"></i> Add category
-    </a>
+    @can('categories.create')
+      <a class="btn btn-accent" href="{{ route('categories.create') }}">
+        <i class="bi bi-plus-lg"></i> Add category
+      </a>
+    @endcan
   </div>
 
   <div class="card-x">
@@ -51,7 +53,9 @@
             <th scope="col">Name</th>
             <th scope="col">Slug</th>
             <th scope="col">Status</th>
-            <th scope="col" class="text-end">Actions</th>
+            @canany(['categories.edit', 'categories.delete'])
+              <th scope="col" class="text-end">Actions</th>
+            @endcanany
           </tr>
         </thead>
         <tbody>
@@ -66,23 +70,30 @@
                   <span class="status low">Inactive</span>
                 @endif
               </td>
-              <td class="text-end">
-                <a class="btn btn-sm btn-light" href="{{ route('categories.edit', $category) }}">
-                  <i class="bi bi-pencil"></i> Edit
-                </a>
-                <form class="d-inline" method="POST" action="{{ route('categories.destroy', $category) }}"
-                      onsubmit="return confirm('Delete this category?');">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-sm btn-light text-danger" type="submit">
-                    <i class="bi bi-trash"></i> Delete
-                  </button>
-                </form>
-              </td>
+              @canany(['categories.edit', 'categories.delete'])
+                <td class="text-end">
+                  @can('categories.edit')
+                    <a class="btn btn-sm btn-light" href="{{ route('categories.edit', $category) }}">
+                      <i class="bi bi-pencil"></i> Edit
+                    </a>
+                  @endcan
+                  @can('categories.delete')
+                    <form class="d-inline" method="POST" action="{{ route('categories.destroy', $category) }}"
+                          onsubmit="return confirm('Delete this category?');">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-sm btn-light text-danger" type="submit">
+                        <i class="bi bi-trash"></i> Delete
+                      </button>
+                    </form>
+                  @endcan
+                </td>
+              @endcanany
             </tr>
           @empty
             <tr>
-              <td colspan="4" class="text-center text-muted py-4">No categories found.</td>
+              <td colspan="{{ auth()->user()->can('categories.edit') || auth()->user()->can('categories.delete') ? 4 : 3 }}"
+                  class="text-center text-muted py-4">No categories found.</td>
             </tr>
           @endforelse
         </tbody>

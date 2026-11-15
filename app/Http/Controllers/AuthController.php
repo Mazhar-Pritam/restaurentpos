@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Services\RegisterUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
@@ -42,12 +42,10 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
-        // role কখনো ফর্ম থেকে নেওয়া হয় না; নতুন ইউজার সবসময় staff
-        $user = User::create([
+        $user = app(RegisterUser::class)->create([
             'name'     => $data['name'],
             'email'    => $data['email'],
-            'password' => $data['password'], // User মডেলের 'hashed' cast নিজে হ্যাশ করে
-            'role'     => 'staff',
+            'password' => $data['password'],
         ]);
 
         Auth::login($user);

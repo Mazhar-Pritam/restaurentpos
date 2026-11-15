@@ -32,5 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::resource('menu/categories', CategoryController::class)
         ->except('show')
-        ->names('categories');
+        ->names('categories')
+        ->middlewareFor('index', 'can:categories.view')
+        ->middlewareFor('create', 'can:categories.create')
+        ->middlewareFor('store', 'can:categories.create')
+        ->middlewareFor('edit', 'can:categories.edit')
+        ->middlewareFor('update', 'can:categories.edit')
+        ->middlewareFor('destroy', 'can:categories.delete');
 });
