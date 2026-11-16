@@ -22,7 +22,10 @@ class Category extends Model
             'is_active' => 'boolean',
         ];
     }
-
+public function menuItems()
+{
+    return $this->hasMany(MenuItem::class);
+}
     protected static function booted(): void
     {
         static::saving(function (Category $category): void {
