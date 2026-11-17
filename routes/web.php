@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CustomerController;
 
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
@@ -42,7 +44,7 @@ Route::middleware('auth')->group(function () {
         ->middlewareFor('update', 'can:menu_items.edit')
         ->middlewareFor('destroy', 'can:menu_items.delete');
         
-    Route::resource('inventory', IngredientController::class)
+        Route::resource('inventory', IngredientController::class)
         ->except('show')
         ->parameters(['inventory' => 'ingredient'])
         ->names('ingredients')
@@ -52,6 +54,25 @@ Route::middleware('auth')->group(function () {
         ->middlewareFor('edit', 'can:ingredients.edit')
         ->middlewareFor('update', 'can:ingredients.edit')
         ->middlewareFor('destroy', 'can:ingredients.delete');
+      
+         Route::resource('suppliers', SupplierController::class)
+        ->except('show')
+        ->middlewareFor('index', 'can:suppliers.view')
+        ->middlewareFor('create', 'can:suppliers.create')
+        ->middlewareFor('store', 'can:suppliers.create')
+        ->middlewareFor('edit', 'can:suppliers.edit')
+        ->middlewareFor('update', 'can:suppliers.edit')
+        ->middlewareFor('destroy', 'can:suppliers.delete');
+
+        Route::resource('customers', CustomerController::class)
+            ->except('show')
+            ->middlewareFor('index', 'can:customers.view')
+            ->middlewareFor('create', 'can:customers.create')
+            ->middlewareFor('store', 'can:customers.create')
+            ->middlewareFor('edit', 'can:customers.edit')
+            ->middlewareFor('update', 'can:customers.edit')
+            ->middlewareFor('destroy', 'can:customers.delete');
+            
     // যে পেজগুলো এখনো বানাননি: আপাতত "coming soon" পেজ
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
     $pages = [
@@ -59,8 +80,7 @@ Route::middleware('auth')->group(function () {
         'tables', 'kitchen', 'tables/reservations',
         'menu/recipes',
         'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
-        'purchases', 'purchases/returns', 'suppliers',
-        'customers', 'users',
+        'purchases', 'purchases/returns','users',
         'expenses', 'expenses/cash-register',
         'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
         'settings',
