@@ -125,7 +125,87 @@ class IngredientSeeder extends Seeder
             ['name' => 'Aluminium Foil', 'unit' => 'pcs', 'stock_quantity' => 8.00, 'reorder_level' => 3, 'average_cost' => 350.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Disposable Gloves', 'unit' => 'pcs', 'stock_quantity' => 10.00, 'reorder_level' => 3, 'average_cost' => 250.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Gas Cylinder (LPG)', 'unit' => 'pcs', 'stock_quantity' => 4.00, 'reorder_level' => 2, 'average_cost' => 1450.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+       
+            ['name' => 'Basmati Rice', 'unit' => 'kg', 'stock_quantity' => 50.00, 'reorder_level' => 15, 'average_cost' => 160.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Chinigura (Kalijira) Rice', 'unit' => 'kg', 'stock_quantity' => 60.00, 'reorder_level' => 15, 'average_cost' => 130.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Polao Rice', 'unit' => 'kg', 'stock_quantity' => 40.00, 'reorder_level' => 10, 'average_cost' => 140.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Meat & Eggs ----------
+            ['name' => 'Mutton (Biriyani Cut)', 'unit' => 'kg', 'stock_quantity' => 25.00, 'reorder_level' => 8, 'average_cost' => 1150.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Beef (Biriyani Cut)', 'unit' => 'kg', 'stock_quantity' => 30.00, 'reorder_level' => 10, 'average_cost' => 780.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Broiler Chicken (Biriyani Cut)', 'unit' => 'kg', 'stock_quantity' => 30.00, 'reorder_level' => 10, 'average_cost' => 200.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Deshi Chicken', 'unit' => 'kg', 'stock_quantity' => 15.00, 'reorder_level' => 5, 'average_cost' => 550.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Egg (Chicken)', 'unit' => 'pcs', 'stock_quantity' => 180.00, 'reorder_level' => 60, 'average_cost' => 13.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Vegetables & Fresh Herbs ----------
+            ['name' => 'Potato', 'unit' => 'kg', 'stock_quantity' => 40.00, 'reorder_level' => 12, 'average_cost' => 40.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Onion', 'unit' => 'kg', 'stock_quantity' => 50.00, 'reorder_level' => 15, 'average_cost' => 80.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Fried Onion (Beresta)', 'unit' => 'kg', 'stock_quantity' => 8.00, 'reorder_level' => 2, 'average_cost' => 450.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Garlic', 'unit' => 'kg', 'stock_quantity' => 10.00, 'reorder_level' => 3, 'average_cost' => 220.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Ginger', 'unit' => 'kg', 'stock_quantity' => 10.00, 'reorder_level' => 3, 'average_cost' => 200.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Green Chili', 'unit' => 'kg', 'stock_quantity' => 5.00, 'reorder_level' => 1.5, 'average_cost' => 120.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Coriander Leaves', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 150.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mint Leaves', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 200.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Lemon', 'unit' => 'pcs', 'stock_quantity' => 100.00, 'reorder_level' => 30, 'average_cost' => 8.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cucumber', 'unit' => 'kg', 'stock_quantity' => 8.00, 'reorder_level' => 3, 'average_cost' => 60.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Dairy & Fats ----------
+            ['name' => 'Yogurt (Doi)', 'unit' => 'kg', 'stock_quantity' => 20.00, 'reorder_level' => 6, 'average_cost' => 160.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Ghee', 'unit' => 'kg', 'stock_quantity' => 10.00, 'reorder_level' => 3, 'average_cost' => 950.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Milk', 'unit' => 'l', 'stock_quantity' => 15.00, 'reorder_level' => 5, 'average_cost' => 95.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Soybean Oil', 'unit' => 'l', 'stock_quantity' => 60.00, 'reorder_level' => 20, 'average_cost' => 175.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Whole Spices ----------
+            ['name' => 'Cardamom (Elach)', 'unit' => 'kg', 'stock_quantity' => 1.00, 'reorder_level' => 0.3, 'average_cost' => 4500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cinnamon (Daruchini)', 'unit' => 'kg', 'stock_quantity' => 1.50, 'reorder_level' => 0.5, 'average_cost' => 700.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cloves (Lobongo)', 'unit' => 'kg', 'stock_quantity' => 1.00, 'reorder_level' => 0.3, 'average_cost' => 1800.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Bay Leaf (Tejpata)', 'unit' => 'kg', 'stock_quantity' => 1.00, 'reorder_level' => 0.3, 'average_cost' => 300.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Black Pepper Whole', 'unit' => 'kg', 'stock_quantity' => 2.00, 'reorder_level' => 0.5, 'average_cost' => 1400.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Nutmeg (Joyfol)', 'unit' => 'kg', 'stock_quantity' => 0.50, 'reorder_level' => 0.1, 'average_cost' => 3500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mace (Joitri)', 'unit' => 'kg', 'stock_quantity' => 0.30, 'reorder_level' => 0.1, 'average_cost' => 5500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Star Anise', 'unit' => 'kg', 'stock_quantity' => 0.50, 'reorder_level' => 0.1, 'average_cost' => 1600.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cumin Seeds (Jira)', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 750.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Shahi Jeera (Caraway)', 'unit' => 'kg', 'stock_quantity' => 0.50, 'reorder_level' => 0.1, 'average_cost' => 1500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Dry Red Chili', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 450.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Ground Spices & Masala ----------
+            ['name' => 'Turmeric Powder', 'unit' => 'kg', 'stock_quantity' => 4.00, 'reorder_level' => 1.5, 'average_cost' => 300.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Chili Powder', 'unit' => 'kg', 'stock_quantity' => 5.00, 'reorder_level' => 1.5, 'average_cost' => 500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Coriander Powder', 'unit' => 'kg', 'stock_quantity' => 4.00, 'reorder_level' => 1.5, 'average_cost' => 300.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cumin Powder', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 800.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Garam Masala Powder', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 1200.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Biryani Masala', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 1000.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Kacchi Masala', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 1000.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Black Pepper Powder', 'unit' => 'kg', 'stock_quantity' => 2.00, 'reorder_level' => 0.5, 'average_cost' => 1500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Jafran (Biryani Color)', 'unit' => 'g', 'stock_quantity' => 200.00, 'reorder_level' => 50, 'average_cost' => 2.50, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Saffron (Zafran)', 'unit' => 'g', 'stock_quantity' => 20.00, 'reorder_level' => 5, 'average_cost' => 450.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Kewra Water', 'unit' => 'ml', 'stock_quantity' => 1000.00, 'reorder_level' => 250, 'average_cost' => 0.30, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Rose Water', 'unit' => 'ml', 'stock_quantity' => 1000.00, 'reorder_level' => 250, 'average_cost' => 0.35, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Salt', 'unit' => 'kg', 'stock_quantity' => 20.00, 'reorder_level' => 6, 'average_cost' => 40.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Sugar', 'unit' => 'kg', 'stock_quantity' => 10.00, 'reorder_level' => 3, 'average_cost' => 130.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Dry Fruits & Add-ons ----------
+            ['name' => 'Raisin (Kishmish)', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 700.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cashew Nut', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 1400.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Almond', 'unit' => 'kg', 'stock_quantity' => 2.00, 'reorder_level' => 0.5, 'average_cost' => 1500.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Dried Plum (Alubukhara)', 'unit' => 'kg', 'stock_quantity' => 2.00, 'reorder_level' => 0.5, 'average_cost' => 900.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Side Dishes ----------
+            ['name' => 'Borhani Mix', 'unit' => 'kg', 'stock_quantity' => 3.00, 'reorder_level' => 1, 'average_cost' => 600.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Roasted Chicken / Jali Kabab Meat', 'unit' => 'kg', 'stock_quantity' => 6.00, 'reorder_level' => 2, 'average_cost' => 420.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Firni / Zarda Mix', 'unit' => 'kg', 'stock_quantity' => 4.00, 'reorder_level' => 1, 'average_cost' => 450.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+
+            // ---------- Packaging & Fuel ----------
+            ['name' => 'Biryani Box (Container)', 'unit' => 'pcs', 'stock_quantity' => 300.00, 'reorder_level' => 100, 'average_cost' => 18.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Borhani Cup with Lid', 'unit' => 'pcs', 'stock_quantity' => 300.00, 'reorder_level' => 100, 'average_cost' => 6.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Salad Cup', 'unit' => 'pcs', 'stock_quantity' => 300.00, 'reorder_level' => 100, 'average_cost' => 3.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Aluminium Foil', 'unit' => 'pcs', 'stock_quantity' => 8.00, 'reorder_level' => 3, 'average_cost' => 350.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Disposable Spoon', 'unit' => 'pcs', 'stock_quantity' => 1000.00, 'reorder_level' => 300, 'average_cost' => 1.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Tissue Paper', 'unit' => 'pcs', 'stock_quantity' => 50.00, 'reorder_level' => 15, 'average_cost' => 40.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Gas Cylinder (LPG)', 'unit' => 'pcs', 'stock_quantity' => 6.00, 'reorder_level' => 2, 'average_cost' => 1450.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Firewood / Charcoal (Dum)', 'unit' => 'kg', 'stock_quantity' => 30.00, 'reorder_level' => 10, 'average_cost' => 45.00, 'is_active' => 1, 'deleted_at' => null, 'created_at' => now(), 'updated_at' => now()],
         ];
+        
 
         foreach ($ingredients as $ingredient) {
             DB::table('ingredients')->updateOrInsert(
