@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\RecipeController;
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
 Auth::routes();
@@ -72,13 +72,23 @@ Route::middleware('auth')->group(function () {
             ->middlewareFor('edit', 'can:customers.edit')
             ->middlewareFor('update', 'can:customers.edit')
             ->middlewareFor('destroy', 'can:customers.delete');
+
+      Route::resource('menu/recipes', RecipeController::class)
+            ->except('show')
+            ->parameters(['recipes' => 'menu_item'])
+            ->names('recipes')
+            ->middlewareFor('index', 'can:recipes.view')
+            ->middlewareFor('create', 'can:recipes.create')
+            ->middlewareFor('store', 'can:recipes.create')
+            ->middlewareFor('edit', 'can:recipes.edit')
+            ->middlewareFor('update', 'can:recipes.edit')
+            ->middlewareFor('destroy', 'can:recipes.delete');
             
     // যে পেজগুলো এখনো বানাননি: আপাতত "coming soon" পেজ
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
     $pages = [
         'pos', 'orders', 'orders/returns',
         'tables', 'kitchen', 'tables/reservations',
-        'menu/recipes',
         'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
         'purchases', 'purchases/returns','users',
         'expenses', 'expenses/cash-register',

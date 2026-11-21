@@ -22,6 +22,10 @@ class MenuItem extends Model
         // soft-delete হওয়া ক্যাটাগরির নামও যাতে দেখা যায়
         return $this->belongsTo(Category::class)->withTrashed();
     }
+    public function recipes()
+     {
+            return $this->hasMany(Recipe::class);
+      } 
 
     // $item->image_url : ছবি থাকলে পাবলিক URL, না থাকলে null
     public function getImageUrlAttribute(): ?string
