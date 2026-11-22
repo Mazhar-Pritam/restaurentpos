@@ -61,20 +61,29 @@ class IngredientController extends Controller
             ->with('success', 'Ingredient updated successfully.');
     }
 
-    public function destroy(Ingredient $ingredient)
-    {
-        // রেসিপিতে ব্যবহার হলে delete আটকাবে (recipes টেবিল বানানোর পর চালু হবে)
-        if (Schema::hasTable('recipes')
-            && DB::table('recipes')->where('ingredient_id', $ingredient->id)->exists()) {
-            return redirect()
-                ->route('ingredients.index')
-                ->with('error', 'This ingredient cannot be deleted because it is used in a recipe.');
-        }
+   public function destroy(Ingredient $ingredient)
+{
+    // রেসিপি বা purchase এ ব্যবহার হলে delete আটকাবে
+    $usedInRecipe = Schema::hasTable('recipes')
+        && DB::table('recipes')->where('ingredient_id', $ingredient->id)->exists();
 
-        $ingredient->delete();
+    $usedInPurchase = Schema::hasTable('purchase_items')
+        && DB::table('purchase_items')
+            ->join('purchases', 'purchases.id', '=', 'purchase_items.purchase_id')
+            ->whereNull('purchases.deleted_at')
+            ->where('purchase_items.ingredient_id', $ingredient->id)
+            ->exists();
 
+    if ($usedInRecipe || $usedInPurchase) {
         return redirect()
             ->route('ingredients.index')
-            ->with('success', 'Ingredient deleted successfully.');
+            ->with('error', 'This ingredient cannot be deleted because it is used in a recipe or a purchase.');
     }
+
+    $ingredient->delete();
+
+    return redirect()
+        ->route('ingredients.index')
+        ->with('success', 'Ingredient deleted successfully.');
 }
+}   

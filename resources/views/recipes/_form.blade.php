@@ -1,4 +1,11 @@
-@php($isEdit = isset($menuItem) && $menuItem && $menuItem->exists)
+@php
+  $isEdit = isset($menuItem) && $menuItem && $menuItem->exists;
+  // Blade এর json ডিরেক্টিভে কমাওয়ালা এক্সপ্রেশন চলে না, তাই ডেটা এখানে ভ্যারিয়েবলে রাখা হলো
+    $ingredientData = $ingredients->map(fn ($i) => ['id' => $i->id, 'name' => $i->name, 'unit' => $i->unit])->values();
+  $initialRows    = old('items', $rows);
+  $errorData      = $errors->messages();
+@endphp
+
 
 <div class="card-x">
   <div class="card-h">{{ $isEdit ? 'Update recipe' : 'Recipe details' }}</div>
@@ -49,9 +56,9 @@
 @push('scripts')
 <script>
   (function () {
-    var ingredients = @json($ingredients->map(fn ($i) => ['id' => $i->id, 'name' => $i->name, 'unit' => $i->unit])->values());
-    var initial = @json(old('items', $rows));
-    var errs = @json($errors->messages());
+    var ingredients = @json($ingredientData);
+    var initial = @json($initialRows);
+    var errs = @json($errorData);
     var box = document.getElementById('recipe-rows');
     var next = 0;
 

@@ -50,6 +50,9 @@ class RolePermissionSeeder extends Seeder
         $superAdmin->syncPermissions($supplierPermissions);
         $superAdmin->syncPermissions($customerPermissions);
         $superAdmin->syncPermissions($recipePermissions);
+        $superAdmin->syncPermissions($purchasePermissions);
+        $superAdmin->syncPermissions($tablePermissions);
+        $superAdmin->syncPermissions($expensePermissions);
 
         $staff = Role::findOrCreate('staff', 'web');
         $staff->syncPermissions(['categories.view']);
@@ -58,7 +61,9 @@ class RolePermissionSeeder extends Seeder
         $staff->syncPermissions(['suppliers.view',]);
         $staff->syncPermissions(['customers.view',]);
         $staff->syncPermissions(['recipes.view',]);
-        
+        $staff->syncPermissions(['purchases.view',]);
+        $staff->syncPermissions(['tables.view',]);
+        $staff->syncPermissions(['expenses.view',]);
 
         User::query()->orderBy('id')->get()->each(function (User $user, int $index): void {
             $user->syncRoles($index === 0 ? 'super-admin' : 'staff');

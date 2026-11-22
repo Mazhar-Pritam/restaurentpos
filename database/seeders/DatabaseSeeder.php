@@ -9,9 +9,11 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
+   $this->call([
+    IngredientSeeder::class,
+    MenuItemSeeder::class,   // menu item আগে লাগবে
+    RecipeSeeder::class,
+]);
     public function run(): void
     {
         $this->call(RolePermissionSeeder::class);

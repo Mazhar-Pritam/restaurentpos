@@ -10,17 +10,21 @@ use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RestaurantTableController;
+
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
 Auth::routes();
 
 Route::get('/', fn () => redirect('/dashboard'));
+ Route::pattern('purchase', '[0-9]+');
 
 // এই গ্রুপের সব পেজ লগইন ছাড়া খুলবে না
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
+    
     // Categories
     Route::resource('menu/categories', CategoryController::class)
         ->except('show')
@@ -83,14 +87,30 @@ Route::middleware('auth')->group(function () {
             ->middlewareFor('edit', 'can:recipes.edit')
             ->middlewareFor('update', 'can:recipes.edit')
             ->middlewareFor('destroy', 'can:recipes.delete');
+
+         Route::resource('purchases', PurchaseController::class)
+            ->middlewareFor(['index', 'show'], 'can:purchases.view')
+            ->middlewareFor(['create', 'store'], 'can:purchases.create')
+            ->middlewareFor(['edit', 'update'], 'can:purchases.edit')
+            ->middlewareFor('destroy', 'can:purchases.delete');   
+
+         Route::resource('tables', RestaurantTableController::class)
+            ->except('show')
+            ->parameters(['tables' => 'table'])
+            ->middlewareFor('index', 'can:tables.view')
+            ->middlewareFor('create', 'can:tables.create')
+            ->middlewareFor('store', 'can:tables.create')
+            ->middlewareFor('edit', 'can:tables.edit')
+            ->middlewareFor('update', 'can:tables.edit')
+            ->middlewareFor('destroy', 'can:tables.delete');
             
     // যে পেজগুলো এখনো বানাননি: আপাতত "coming soon" পেজ
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
     $pages = [
         'pos', 'orders', 'orders/returns',
-        'tables', 'kitchen', 'tables/reservations',
+        'kitchen',
         'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
-        'purchases', 'purchases/returns','users',
+         'purchases/returns','users',
         'expenses', 'expenses/cash-register',
         'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
         'settings',

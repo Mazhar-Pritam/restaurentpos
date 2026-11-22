@@ -207,11 +207,14 @@ class IngredientSeeder extends Seeder
         ];
         
 
-        foreach ($ingredients as $ingredient) {
-            DB::table('ingredients')->updateOrInsert(
-                ['name' => $ingredient['name']],
-                $ingredient
-            );
+               foreach ($ingredients as $ingredient) {
+            $exists = DB::table('ingredients')
+                ->where('name', $ingredient['name'])
+                ->exists();
+
+            if (! $exists) {
+                DB::table('ingredients')->insert($ingredient);
+            }
         }
     }
 }
