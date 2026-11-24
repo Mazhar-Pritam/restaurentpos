@@ -12,13 +12,16 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RestaurantTableController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SettingController;
 
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
 Auth::routes();
 
-Route::get('/', fn () => redirect('/dashboard'));
- Route::pattern('purchase', '[0-9]+');
+    Route::get('/', fn () => redirect('/dashboard'));
+    Route::pattern('purchase', '[0-9]+');
+    Route::pattern('order', '[0-9]+');
 
 // এই গ্রুপের সব পেজ লগইন ছাড়া খুলবে না
     Route::middleware('auth')->group(function () {
@@ -103,17 +106,27 @@ Route::get('/', fn () => redirect('/dashboard'));
             ->middlewareFor('edit', 'can:tables.edit')
             ->middlewareFor('update', 'can:tables.edit')
             ->middlewareFor('destroy', 'can:tables.delete');
+
+         Route::get('pos', [OrderController::class, 'create'])->name('pos')->middleware('can:orders.create');
+          Route::get('orders', [OrderController::class, 'index'])->name('orders.index')->middleware('can:orders.view');
+          Route::post('orders', [OrderController::class, 'store'])->name('orders.store')->middleware('can:orders.create');
+          Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show')->middleware('can:orders.view');
+          Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status')->middleware('can:orders.update_status');
+          Route::delete('orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy')->middleware('can:orders.delete');
+
+          Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit')->middleware('can:settings.view');
+          Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
             
     // যে পেজগুলো এখনো বানাননি: আপাতত "coming soon" পেজ
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
     $pages = [
-        'pos', 'orders', 'orders/returns',
+         'orders/returns',
         'kitchen',
         'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
          'purchases/returns','users',
         'expenses', 'expenses/cash-register',
         'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
-        'settings',
+        
     ];
 
     foreach ($pages as $page) {
