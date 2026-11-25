@@ -14,6 +14,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ReservationController;
 
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
@@ -113,6 +114,16 @@ Auth::routes();
           Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show')->middleware('can:orders.view');
           Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.status')->middleware('can:orders.update_status');
           Route::delete('orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy')->middleware('can:orders.delete');
+          Route::get('kitchen', [OrderController::class, 'kitchen'])->name('kitchen')->middleware('can:orders.view');
+
+          Route::resource('reservations', ReservationController::class)
+            ->except('show')
+            ->middlewareFor('index', 'can:reservations.view')
+            ->middlewareFor('create', 'can:reservations.create')
+            ->middlewareFor('store', 'can:reservations.create')
+            ->middlewareFor('edit', 'can:reservations.edit')
+            ->middlewareFor('update', 'can:reservations.edit')
+            ->middlewareFor('destroy', 'can:reservations.delete');
 
           Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit')->middleware('can:settings.view');
           Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
@@ -121,7 +132,6 @@ Auth::routes();
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
     $pages = [
          'orders/returns',
-        'kitchen',
         'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
          'purchases/returns','users',
         'expenses', 'expenses/cash-register',

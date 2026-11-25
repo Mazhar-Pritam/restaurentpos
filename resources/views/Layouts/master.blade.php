@@ -4,7 +4,7 @@
   $menu = [
     ['Overview',   [['Dashboard', 'bi-speedometer2', 'dashboard']]],
     ['Orders',     [['POS terminal', 'bi-receipt', 'pos'], ['All orders', 'bi-list-check', 'orders'], ['Sales returns', 'bi-arrow-return-left', 'orders/returns']]],
-    ['Restaurant', [['Tables', 'bi-grid-3x3-gap', 'tables'], ['Kitchen display', 'bi-fire', 'kitchen'], ['Reservations', 'bi-calendar-check', 'tables/reservations']]],
+    ['Restaurant', [['Tables', 'bi-grid-3x3-gap', 'tables'], ['Kitchen display', 'bi-fire', 'kitchen'], ['Reservations', 'bi-calendar-check', 'reservations']]],
     ['Menu',       [['Menu items', 'bi-egg-fried', 'menu'], ['Categories', 'bi-tags', 'menu/categories'], ['Recipes', 'bi-journal-text', 'menu/recipes']]],
     ['Inventory',  [['Ingredients', 'bi-box-seam', 'inventory'], ['Low stock', 'bi-exclamation-triangle', 'inventory/low-stock'], ['Stock adjustments', 'bi-sliders', 'inventory/adjust'], ['Damage and waste', 'bi-trash3', 'inventory/waste']]],
     ['Purchasing', [['Purchases', 'bi-truck', 'purchases'], ['Purchase returns', 'bi-box-arrow-left', 'purchases/returns'], ['Suppliers', 'bi-shop', 'suppliers']]],

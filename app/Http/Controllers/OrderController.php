@@ -111,6 +111,21 @@ class OrderController extends Controller
         return back()->with('success', 'Order '.$order->order_no.' marked '.strtolower(Order::STATUSES[$data['status']]).'.');
     }
 
+    public function kitchen()
+    {
+        $cooking = Order::with(['items', 'table', 'customer'])
+            ->where('status', 'cooking')
+            ->orderBy('created_at')
+            ->get();
+
+        $ready = Order::with(['items', 'table', 'customer'])
+            ->where('status', 'ready')
+            ->orderBy('created_at')
+            ->get();
+
+        return view('kitchen.index', compact('cooking', 'ready'));
+    }
+
     public function destroy(Order $order)
     {
         $this->orders->void($order);
