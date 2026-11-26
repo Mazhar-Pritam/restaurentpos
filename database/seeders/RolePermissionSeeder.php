@@ -36,6 +36,29 @@ class RolePermissionSeeder extends Seeder
             'recipes.create',
             'recipes.edit',
             'recipes.delete',
+            'purchases.view',
+            'purchases.create',
+            'purchases.edit',
+            'purchases.delete',
+            'tables.view',
+            'tables.create',
+            'tables.edit',
+            'tables.delete',
+            'expenses.view',
+            'expenses.create',
+            'expenses.edit',
+            'expenses.delete',
+            'orders.view',
+            'orders.create',
+            'orders.edit',
+            'orders.update_status',
+            'orders.delete',
+            'reservations.view',
+            'reservations.create',
+            'reservations.edit',
+            'reservations.delete',
+            'settings.view',
+            'settings.edit',
             ];
         
 
@@ -47,23 +70,25 @@ class RolePermissionSeeder extends Seeder
         $admin->syncPermissions($categoryPermissions);
         $superAdmin = Role::findOrCreate('super-admin', 'web');
         $superAdmin->syncPermissions($categoryPermissions);
-        $superAdmin->syncPermissions($supplierPermissions);
-        $superAdmin->syncPermissions($customerPermissions);
-        $superAdmin->syncPermissions($recipePermissions);
-        $superAdmin->syncPermissions($purchasePermissions);
-        $superAdmin->syncPermissions($tablePermissions);
-        $superAdmin->syncPermissions($expensePermissions);
-
+    
         $staff = Role::findOrCreate('staff', 'web');
-        $staff->syncPermissions(['categories.view']);
-        $staff->syncPermissions(['categories.view', 'menu_items.view']);
-        $staff->syncPermissions(['categories.view', 'menu_items.view', 'ingredients.view']);
-        $staff->syncPermissions(['suppliers.view',]);
-        $staff->syncPermissions(['customers.view',]);
-        $staff->syncPermissions(['recipes.view',]);
-        $staff->syncPermissions(['purchases.view',]);
-        $staff->syncPermissions(['tables.view',]);
-        $staff->syncPermissions(['expenses.view',]);
+        $staff->syncPermissions([
+            'categories.view',
+            'menu_items.view',
+            'ingredients.view',
+            'suppliers.view',
+            'customers.view',
+            'recipes.view',
+            'purchases.view',
+            'tables.view',
+            'expenses.view',
+            'orders.view',
+            'orders.create',
+            'orders.update_status',
+            'reservations.view',
+            'reservations.create',
+            'reservations.edit',
+        ]);
 
         User::query()->orderBy('id')->get()->each(function (User $user, int $index): void {
             $user->syncRoles($index === 0 ? 'super-admin' : 'staff');
