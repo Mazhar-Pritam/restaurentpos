@@ -125,6 +125,19 @@ Auth::routes();
             ->middlewareFor('update', 'can:reservations.edit')
             ->middlewareFor('destroy', 'can:reservations.delete');
 
+          Route::resource('reservations', ReservationController::class)
+            ->except(['show'])
+            ->middlewareFor(['index'], 'can:reservations.view')
+            ->middlewareFor(['create', 'store'], 'can:reservations.create')
+            ->middlewareFor(['edit', 'update'], 'can:reservations.edit')
+            ->middlewareFor(['destroy'], 'can:reservations.delete');
+
+
+
+    Route::patch('reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])
+            ->name('reservations.status')
+            ->middleware('can:reservations.update_status');
+
           Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit')->middleware('can:settings.view');
           Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
             
