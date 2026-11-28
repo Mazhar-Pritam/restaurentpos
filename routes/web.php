@@ -18,6 +18,9 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\StockAdjustmentController;
 use App\Http\Controllers\LowStockController;
 use App\Http\Controllers\PurchaseReturnController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SalesReturnController;
+
 
 
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
@@ -161,6 +164,22 @@ Auth::routes();
             ->middlewareFor(['create', 'store'], 'can:purchase_returns.create')
             ->middlewareFor(['destroy'], 'can:purchase_returns.delete');        
 
+            Route::resource('expenses', ExpenseController::class)
+                ->except(['show'])
+                ->middlewareFor(['index'], 'can:expenses.view')
+                ->middlewareFor(['create', 'store'], 'can:expenses.create')
+                ->middlewareFor(['edit', 'update'], 'can:expenses.edit')
+                ->middlewareFor(['destroy'], 'can:expenses.delete');
+
+
+            Route::resource('orders/returns', SalesReturnController::class)
+                ->only(['index', 'create', 'store', 'show', 'destroy'])
+                ->names('sales-returns')
+                ->parameters(['returns' => 'sales_return'])
+                ->middlewareFor(['index', 'show'], 'can:sales_returns.view')
+                ->middlewareFor(['create', 'store'], 'can:sales_returns.create')
+                ->middlewareFor(['destroy'], 'can:sales_returns.delete');
+
 
           Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit')->middleware('can:settings.view');
           Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
@@ -168,10 +187,9 @@ Auth::routes();
     // যে পেজগুলো এখনো বানাননি: আপাতত "coming soon" পেজ
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
         $pages = [
-            'orders/returns',
-            'users',
-            'expenses', 'expenses/cash-register',
-            'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
+            
+         'users',
+        'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
         ];
 
     foreach ($pages as $page) {

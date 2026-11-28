@@ -70,6 +70,7 @@ class RolePermissionSeeder extends Seeder
         $admin->syncPermissions($categoryPermissions);
         $superAdmin = Role::findOrCreate('super-admin', 'web');
         $superAdmin->syncPermissions($categoryPermissions);
+        $SuperAdmin->syncPermissions($expensePermissions);
     
         $staff = Role::findOrCreate('staff', 'web');
         $staff->syncPermissions([
@@ -86,8 +87,8 @@ class RolePermissionSeeder extends Seeder
             'orders.create',
             'orders.update_status',
             'reservations.view',
-            'reservations.create',
-            'reservations.edit',
+           'expenses.view',
+        
         ]);
 
         User::query()->orderBy('id')->get()->each(function (User $user, int $index): void {
