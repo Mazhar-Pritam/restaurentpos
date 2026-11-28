@@ -15,6 +15,8 @@ use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\StockAdjustmentController;
+use App\Http\Controllers\LowStockController;
 
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
@@ -133,24 +135,34 @@ Auth::routes();
             ->middlewareFor(['destroy'], 'can:reservations.delete');
 
 
-
-    Route::patch('reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])
+        Route::patch('reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])
             ->name('reservations.status')
             ->middleware('can:reservations.update_status');
+
+            
+        Route::get('stock-adjustments', [StockAdjustmentController::class, 'index'])
+            ->name('stock-adjustments.index')->middleware('can:stock_adjustments.view');
+        Route::get('stock-adjustments/create', [StockAdjustmentController::class, 'create'])
+            ->name('stock-adjustments.create')->middleware('can:stock_adjustments.create');
+        Route::post('stock-adjustments', [StockAdjustmentController::class, 'store'])
+            ->name('stock-adjustments.store')->middleware('can:stock_adjustments.create');
+
+       Route::get('inventory/low-stock', [LowStockController::class, 'index'])
+                ->name('low-stock')
+                ->middleware('can:ingredients.view');
+
 
           Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit')->middleware('can:settings.view');
           Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
             
     // যে পেজগুলো এখনো বানাননি: আপাতত "coming soon" পেজ
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
-    $pages = [
-         'orders/returns',
-        'inventory/low-stock', 'inventory/adjust', 'inventory/waste',
-         'purchases/returns','users',
-        'expenses', 'expenses/cash-register',
-        'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
-        
-    ];
+        $pages = [
+            'orders/returns',
+            'purchases/returns', 'users',
+            'expenses', 'expenses/cash-register',
+            'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
+        ];
 
     foreach ($pages as $page) {
         Route::view($page, 'coming-soon', ['title' => Str::headline($page)]);

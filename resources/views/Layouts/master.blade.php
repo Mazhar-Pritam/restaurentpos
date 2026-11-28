@@ -6,13 +6,16 @@
     ['Orders',     [['POS terminal', 'bi-receipt', 'pos'], ['All orders', 'bi-list-check', 'orders'], ['Sales returns', 'bi-arrow-return-left', 'orders/returns']]],
     ['Restaurant', [['Tables', 'bi-grid-3x3-gap', 'tables'], ['Kitchen display', 'bi-fire', 'kitchen'], ['Reservations', 'bi-calendar-check', 'reservations']]],
     ['Menu',       [['Menu items', 'bi-egg-fried', 'menu'], ['Categories', 'bi-tags', 'menu/categories'], ['Recipes', 'bi-journal-text', 'menu/recipes']]],
-    ['Inventory',  [['Ingredients', 'bi-box-seam', 'inventory'], ['Low stock', 'bi-exclamation-triangle', 'inventory/low-stock'], ['Stock adjustments', 'bi-sliders', 'inventory/adjust'], ['Damage and waste', 'bi-trash3', 'inventory/waste']]],
+    ['Inventory',  [['Ingredients', 'bi-box-seam', 'inventory'], ['Low stock', 'bi-exclamation-triangle', 'inventory/low-stock'], ['Stock adjustments', 'bi-sliders', 'stock-adjustments']]],
     ['Purchasing', [['Purchases', 'bi-truck', 'purchases'], ['Purchase returns', 'bi-box-arrow-left', 'purchases/returns'], ['Suppliers', 'bi-shop', 'suppliers']]],
     ['People',     [['Customers', 'bi-people', 'customers'], ['Users and roles', 'bi-person-gear', 'users']]],
     ['Money',      [['Expenses', 'bi-wallet2', 'expenses'], ['Cash register', 'bi-cash-stack', 'expenses/cash-register']]],
     ['Reports',    [['Sales report', 'bi-bar-chart-line', 'reports/sales'], ['Purchase report', 'bi-bag', 'reports/purchases'], ['Inventory report', 'bi-boxes', 'reports/inventory'], ['Profit and loss', 'bi-graph-up-arrow', 'reports/profit-loss']]],
     ['Admin',      [['Settings', 'bi-gear', 'settings']]],
   ];
+    $paths   = collect($menu)->flatMap(fn ($g) => collect($g[1])->pluck(2))->filter();
+  $current = $paths->filter(fn ($p) => request()->is($p, $p.'/*'))
+                   ->sortByDesc(fn ($p) => strlen($p))->first();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +37,7 @@
       <div class="grp">{{ $group }}</div>
       @foreach ($items as [$label, $icon, $path])
         @if ($path)
-          <a class="nav-item {{ request()->is($path, $path.'/*') ? 'active' : '' }}" href="{{ url($path) }}">
+        <a class="nav-item {{ $path === $current ? 'active' : '' }}" href="{{ url($path) }}">
             <i class="bi {{ $icon }}"></i>{{ $label }}
           </a>
         @else
@@ -58,11 +61,12 @@
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-                <form method="POST" action="{{ route('logout') }}">
-                  @csrf
-                 <li> <button class="dropdown-item text-danger" type="submit"><i class="bi bi-box-arrow-right me-1"></i>Log out</button>
-                </form>
-              </li>
+                
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button class="dropdown-item text-danger" type="submit"><i class="bi bi-box-arrow-right me-1"></i>Log out</button>
+            </form>
+          </li>
           </ul>
         </div>
       </div>
