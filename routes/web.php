@@ -17,6 +17,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\StockAdjustmentController;
 use App\Http\Controllers\LowStockController;
+use App\Http\Controllers\PurchaseReturnController;
+
 
 // লগইন, রেজিস্টার, পাসওয়ার্ড রিসেট, লগআউট: laravel/ui এর রুট
 // (লগআউট রুটও এর ভেতরেই আছে, আলাদা করে লাগবে না)
@@ -151,6 +153,14 @@ Auth::routes();
                 ->name('low-stock')
                 ->middleware('can:ingredients.view');
 
+        Route::resource('purchases/returns', PurchaseReturnController::class)
+            ->only(['index', 'create', 'store', 'show', 'destroy'])
+            ->names('purchase-returns')
+            ->parameters(['returns' => 'purchase_return'])
+            ->middlewareFor(['index', 'show'], 'can:purchase_returns.view')
+            ->middlewareFor(['create', 'store'], 'can:purchase_returns.create')
+            ->middlewareFor(['destroy'], 'can:purchase_returns.delete');        
+
 
           Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit')->middleware('can:settings.view');
           Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware('can:settings.edit');
@@ -159,7 +169,7 @@ Auth::routes();
     // ('menu' ও 'menu/categories' এখানে নেই, কারণ ওগুলো উপরে বানানো হয়ে গেছে)
         $pages = [
             'orders/returns',
-            'purchases/returns', 'users',
+            'users',
             'expenses', 'expenses/cash-register',
             'reports/sales', 'reports/purchases', 'reports/inventory', 'reports/profit-loss',
         ];

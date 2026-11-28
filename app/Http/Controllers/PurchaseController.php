@@ -90,6 +90,11 @@ class PurchaseController extends Controller
 
     public function edit(Purchase $purchase)
     {
+        if ($purchase->returns()->exists()) {
+            return redirect()->route('purchases.index')
+                ->with('error', 'This purchase has returns, so it can no longer be edited. Delete its returns first.');
+        }
+
         $purchase->load('items');
         $usedIds = $purchase->items->pluck('ingredient_id');
 
@@ -107,6 +112,11 @@ class PurchaseController extends Controller
 
     public function update(PurchaseRequest $request, Purchase $purchase)
     {
+        if ($purchase->returns()->exists()) {
+            return redirect()->route('purchases.index')
+                ->with('error', 'This purchase has returns, so it can no longer be edited. Delete its returns first.');
+        }
+
         try {
             DB::transaction(function () use ($request, $purchase): void {
                 $old   = $purchase->items()->get()->map(fn ($i) => [
@@ -142,6 +152,11 @@ class PurchaseController extends Controller
 
     public function destroy(Purchase $purchase)
     {
+        if ($purchase->returns()->exists()) {
+            return redirect()->route('purchases.index')
+                ->with('error', 'This purchase has returns, so it can no longer be deleted. Delete its returns first.');
+        }
+
         try {
             DB::transaction(function () use ($purchase): void {
                 $old = $purchase->items()->get()->map(fn ($i) => [

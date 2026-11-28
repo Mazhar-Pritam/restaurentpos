@@ -35,10 +35,29 @@ class Purchase extends Model
         return $this->belongsTo(User::class);
     }
 
-    // বাকি টাকা
+    public function returns()
+    {
+        return $this->hasMany(PurchaseReturn::class);
+    }
+
+    // মোট ফেরত দেওয়া মালের দাম
+    public function getReturnedAmountAttribute(): float
+    {
+        return round((float) $this->returns->sum('total_amount'), 2);
+    }
+
+    // ফেরতের বদলে সাপ্লায়ারের কাছ থেকে নগদ ফেরত পাওয়া টাকা
+    public function getRefundedAmountAttribute(): float
+    {
+        return round((float) $this->returns->sum('refund_amount'), 2);
+    }
+
+    // বাকি টাকা = মোট − ফেরত − (পরিশোধ − নগদ ফেরত পাওয়া)
     public function getDueAttribute(): float
     {
-        return max(0, round((float) $this->total_amount - (float) $this->paid_amount, 2));
+        $netPaid = (float) $this->paid_amount - $this->refunded_amount;
+
+        return max(0, round((float) $this->total_amount - $this->returned_amount - $netPaid, 2));
     }
 
     // Paid / Partial / Unpaid
